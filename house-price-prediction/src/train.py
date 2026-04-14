@@ -36,4 +36,13 @@ def train_data(data):
     # Log transformation
     y_train_log = np.log(y_train)
     
+    # Model
+    model = XGBRegressor(
+        n_estimators=1000,
+        max_depth=4,
+        learning_rate=0.05,
+        subsample=0.8,
+        colsample_bytree=0.8,
+        random_state=42
+    )
     
