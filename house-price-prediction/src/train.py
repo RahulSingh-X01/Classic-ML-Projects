@@ -8,3 +8,24 @@ from xgboost import XGBRegressor
 
 def train_data(data):
     
+    # Read the data 
+    df = pd.read_csv(data)
+    
+    # Split the data 
+    X = df.drop('price', axis=1)
+    y = df['price']
+    
+    # Train-test split
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=0.2, random_state=42
+    )
+    
+    # Preprocess the train and test data
+    X_train = preprocess_data(X_train)
+    X_test = preprocess_data(X_test)
+    
+    # Apply feature engineering on train and test data
+    X_train, y_train, encoder = feature_engineering(X_train, y_train, fit=True)
+    X_test = feature_engineering(X_test, fit=False, encoder=encoder)
+    
+    
