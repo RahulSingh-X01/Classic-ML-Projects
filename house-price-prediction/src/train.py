@@ -28,4 +28,12 @@ def train_data(data):
     X_train, y_train, encoder = feature_engineering(X_train, y_train, fit=True)
     X_test = feature_engineering(X_test, fit=False, encoder=encoder)
     
+    # Remove outliers from targets
+    mask = y_train <= 500
+    X_train = X_train[mask]
+    y_train = y_train[mask]
+    
+    # Log transformation
+    y_train_log = np.log(y_train)
+    
     
