@@ -46,3 +46,12 @@ def train_data(data):
         random_state=42
     )
     
+    # Fitting the model
+    model.fit(X_train, y_train_log)
+
+    # Save model and encoder
+    joblib.dump(model, "models/xgb_model.pkl")
+    joblib.dump(encoder, "models/encoder.pkl")
+    
+    print("✅ Model trained and saved.")
+    
