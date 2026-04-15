@@ -1,8 +1,8 @@
 import pandas as pd
 import numpy as np
 import joblib
-from src.preprocess import preprocess_data
-from src.features import feature_engineering
+from preprocess import preprocess_data
+from features import feature_engineering
 from sklearn.model_selection import train_test_split
 from xgboost import XGBRegressor
 
@@ -21,20 +21,23 @@ def train_data(data):
     )
     
     # Preprocess the train and test data
-    X_train = preprocess_data(X_train)
-    X_test = preprocess_data(X_test)
-    
-    # Apply feature engineering on train and test data
-    X_train, y_train, encoder = feature_engineering(X_train, y_train, fit=True)
-    X_test = feature_engineering(X_test, fit=False, encoder=encoder)
+    X_train, num_imputer, cat_imputer = preprocess_data(X_train, fit=True)
+    X_test = preprocess_data(X_test, num_imputer=num_imputer, cat_imputer=cat_imputer, fit=False)
     
     # Remove outliers from targets
     mask = y_train <= 500
     X_train = X_train[mask]
     y_train = y_train[mask]
     
+    # Apply feature engineering on train and test data
+    X_train, y_train, location_encoder, ohe = feature_engineering(X_train, y_train, fit=True)
+    X_test, _, _ = feature_engineering(X_test,fit=False,location_encoder=location_encoder,ohe=ohe)
+    
+    # To align indices
+    y_test = y_test.loc[X_test.index]
+    
     # Log transformation
-    y_train_log = np.log(y_train)
+    y_train_log = np.log1p(y_train)
     
     # Model
     model = XGBRegressor(
@@ -45,13 +48,15 @@ def train_data(data):
         colsample_bytree=0.8,
         random_state=42
     )
-    
-    # Fitting the model
+
+    # Model training
     model.fit(X_train, y_train_log)
 
-    # Save model and encoder
+    # Save model and encoders
     joblib.dump(model, "models/xgb_model.pkl")
-    joblib.dump(encoder, "models/encoder.pkl")
+    joblib.dump(location_encoder, "models/location_encoder.pkl")
+    joblib.dump(ohe, "models/ohe.pkl")
+    joblib.dump(num_imputer, "models/num_imputer.pkl")
+    joblib.dump(cat_imputer, "models/cat_imputer.pkl")
     
     print("✅ Model trained and saved.")
-    
