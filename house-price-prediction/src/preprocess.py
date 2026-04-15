@@ -18,7 +18,7 @@ def convert_string(x):
     
     
 # Main preprocessing fucntion
-def preprocess_data(df):
+def preprocess_data(df, num_imputer=None, cat_imputer=None, fit=True):
     df = df.copy()
 
     # Drop useless column
@@ -31,15 +31,21 @@ def preprocess_data(df):
     # Drop rows where total_sqft is NaN
     df = df.dropna(subset=['total_sqft'])
 
-    # Impute numerical columns with median values
-    numerical_cols = ['total_sqft', 'bath', 'balcony']
-    num_imputer = SimpleImputer(strategy='median')
-    df[numerical_cols] = num_imputer.fit_transform(df[numerical_cols])
-
-    # Impute categorical columns with most frequent(mode) values
+    # Impute missing values of numerical and categorical columns
+    numerical_cols = ['bath', 'balcony']
     categorical_cols = ['area_type', 'availability', 'location', 'size']
-    cat_imputer = SimpleImputer(strategy='most_frequent')
-    df[categorical_cols] = cat_imputer.fit_transform(df[categorical_cols])
+    
+    if fit:
+        num_imputer = SimpleImputer(strategy='median')
+        cat_imputer = SimpleImputer(strategy='most_frequent')
+        df[numerical_cols] = num_imputer.fit_transform(df[numerical_cols])
+        df[categorical_cols] = cat_imputer.fit_transform(df[categorical_cols])
+    else:
+        # Reuse the imputers fitted on train data
+        df[numerical_cols] = num_imputer.transform(df[numerical_cols])
+        df[categorical_cols] = cat_imputer.transform(df[categorical_cols])
+    
+    
 
     # Encode avaliability into 1(ready) or 0(not ready)
     df['availability'] = df['availability'].str.strip().str.lower()
@@ -47,4 +53,7 @@ def preprocess_data(df):
         lambda x: 1 if x == 'ready to move' else 0
     )
 
-    return df
+    if fit:
+        return df, num_imputer, cat_imputer
+    else:
+        return df
