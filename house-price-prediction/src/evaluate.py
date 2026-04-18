@@ -22,3 +22,11 @@ def evaluate(model, X_train, y_train_log, X_test, y_test):
     test_rmse = root_mean_squared_error(y_test, y_test_pred)
     test_r2 = r2_score(y_test, y_test_pred)
     
+    print("#========== Model Evaluation ==========#")
+    print(f"CV R² (mean, cv=5)  : {mean_cv:.4f}")
+    print(f"Train RMSE          : {train_rmse:.4f}")
+    print(f"Train R²            : {train_r2:.4f}")
+    print(f"Test RMSE           : {test_rmse:.4f}")
+    print(f"Test R²             : {test_r2:.4f}")
+    print("======================================")
+    
