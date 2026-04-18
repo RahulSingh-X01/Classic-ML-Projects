@@ -1,8 +1,10 @@
 import pandas as pd
 import numpy as np
 import joblib
+import os
 from preprocess import preprocess_data
 from features import feature_engineering
+from evaluate import evaluate
 from sklearn.model_selection import train_test_split
 from xgboost import XGBRegressor
 
@@ -51,12 +53,15 @@ def train_data(data):
 
     # Model training
     model.fit(X_train, y_train_log)
+    
+    # Model evaluation
+    evaluate(model, X_train, y_train_log, X_test, y_test)
 
     # Save model and encoders
-    joblib.dump(model, "models/xgb_model.pkl")
-    joblib.dump(location_encoder, "models/location_encoder.pkl")
-    joblib.dump(ohe, "models/ohe.pkl")
-    joblib.dump(num_imputer, "models/num_imputer.pkl")
-    joblib.dump(cat_imputer, "models/cat_imputer.pkl")
+    joblib.dump(model, "house-price-prediction/models/xgb_model.pkl")
+    joblib.dump(location_encoder, "house-price-prediction/models/location_encoder.pkl")
+    joblib.dump(ohe, "house-price-prediction/models/ohe.pkl")
+    joblib.dump(num_imputer, "house-price-prediction/models/num_imputer.pkl")
+    joblib.dump(cat_imputer, "house-price-prediction/models/cat_imputer.pkl")
     
     print("✅ Model trained and saved.")
