@@ -4,13 +4,13 @@ from category_encoders import TargetEncoder
 from sklearn.preprocessing import OneHotEncoder
 
 
-def feature_engineering(X, y=None, fit=True, location_encoder=None, ohe=None):
+def feature_engineering(X, y=None, fit=True, location_encoder=None, ohe=None, loc_ppsf=None):
     X = X.copy()
     
     if fit and y is None:
         raise ValueError("y must be provided when fit=True")
     
-    if not fit and (location_encoder is None or ohe is None):
+    if not fit and (location_encoder is None or ohe is None or loc_ppsf is None):
         raise ValueError("encoders must be provided when fit=False")
 
     # Extract numerical values from size column
@@ -20,6 +20,7 @@ def feature_engineering(X, y=None, fit=True, location_encoder=None, ohe=None):
     # Remove outliers only during training
     if fit:
         sqft_per_room = X['total_sqft'] / X['size_num']
+        y = y.loc[X.index]  
         mask = (sqft_per_room >= 300) & (sqft_per_room <= 1500)
         X = X[mask]
         y = y[mask]
@@ -39,6 +40,14 @@ def feature_engineering(X, y=None, fit=True, location_encoder=None, ohe=None):
 
     # Total rooms
     X['total_rooms'] = X['size_num'] + X['bath'] + X['balcony']
+    
+    if fit:
+        price_per_sqft = y / np.exp(X['total_sqft'])
+        loc_ppsf = price_per_sqft.groupby(X['location']).mean()
+        X['loc_ppsf'] = X['location'].map(loc_ppsf)
+        
+    else:
+        X['loc_ppsf'] = X['location'].map(loc_ppsf).fillna(loc_ppsf.mean())
     
     # One-Hot encoding 'area_type' feature
     if fit:
@@ -66,7 +75,7 @@ def feature_engineering(X, y=None, fit=True, location_encoder=None, ohe=None):
         X = location_encoder.transform(X)
 
     if fit:
-        return X, y, location_encoder, ohe
+        return X, y, location_encoder, ohe, loc_ppsf
     
     else:
-        return X, location_encoder, ohe
+        return X
