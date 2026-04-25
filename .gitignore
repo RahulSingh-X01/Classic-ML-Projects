@@ -205,3 +205,10 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+
+# Model files
+*.pkl
+
+# Project specific venv
+project_venv/
