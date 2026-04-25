@@ -1,0 +1,9 @@
+import joblib
+
+model = joblib.load("house-price-prediction/models/xgb_model.pkl")
+ohe = joblib.load("house-price-prediction/models/ohe.pkl")
+location_encoder = joblib.load("house-price-prediction/models/location_encoder.pkl")
+num_imputer = joblib.load("house-price-prediction/models/num_imputer.pkl")
+cat_imputer = joblib.load("house-price-prediction/models/cat_imputer.pkl")
+loc_ppsf = joblib.load("house-price-prediction/models/loc_ppsf.pkl")
+
