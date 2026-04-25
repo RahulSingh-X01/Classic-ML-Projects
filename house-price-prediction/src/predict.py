@@ -1,4 +1,6 @@
+import pandas as pd
 import joblib
+from preprocess import preprocess_data
 
 model = joblib.load("house-price-prediction/models/xgb_model.pkl")
 ohe = joblib.load("house-price-prediction/models/ohe.pkl")
@@ -7,3 +9,16 @@ num_imputer = joblib.load("house-price-prediction/models/num_imputer.pkl")
 cat_imputer = joblib.load("house-price-prediction/models/cat_imputer.pkl")
 loc_ppsf = joblib.load("house-price-prediction/models/loc_ppsf.pkl")
 
+def predict(area_type, availability, location, size, total_sqft, bath, balcony):
+    
+    df = pd.DataFrame([{
+    'area_type': area_type,
+    'availability': availability,
+    'location': location,
+    'size': size,
+    'total_sqft': total_sqft,
+    'bath': bath,
+    'balcony': balcony
+    }])
+    
+    
