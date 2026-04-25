@@ -30,5 +30,6 @@ def predict(area_type, availability, location, size, total_sqft, bath, balcony):
     # Feature engineer the user input 
     df = feature_engineering(df, fit=False, location_encoder=location_encoder, ohe=ohe, loc_ppsf=loc_ppsf)
     
-
+    # Make prediction using model
+    y_pred = np.expm1(model.predict(df))
     
