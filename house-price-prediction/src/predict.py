@@ -33,3 +33,5 @@ def predict(area_type, availability, location, size, total_sqft, bath, balcony):
     # Make prediction using model
     y_pred = np.expm1(model.predict(df))
     
+    # Return the predicted price
+    return round(float(y_pred[0]), 2)
