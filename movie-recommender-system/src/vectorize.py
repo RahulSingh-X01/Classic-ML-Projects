@@ -14,5 +14,5 @@ def vectorize():
     # Calculate cosine similarity between vectors
     similarity = cosine_similarity(vectors)
     
-    return similarity
+    return movies, similarity
     
