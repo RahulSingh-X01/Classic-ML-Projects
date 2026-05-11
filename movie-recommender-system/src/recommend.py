@@ -13,6 +13,9 @@ def recommend_movie(movie):
     # Calculate 5 similar movies
     movie_list = sorted(list(enumerate(distances)), reverse=True, key=lambda x:x[1])[1:6]
     
-    # Print the movies
+    # Return the movies list
+    recommendations = []
     for i in  movie_list:
-        print(movies.iloc[i[0]].title)
+        recommendations.append(movies.iloc[i[0]].title)
+        
+    return recommendations
