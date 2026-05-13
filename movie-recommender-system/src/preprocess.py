@@ -1,3 +1,4 @@
+import os
 import ast
 import pandas as pd
 
@@ -24,8 +25,12 @@ def fetch_director(obj):
 # Main preprocessig fucntion
 def preprocess_data():
     # Load the datasets
-    movies_data = pd.read_csv(r"C:\Users\rahul\Documents\docs\Github Projects\Classic-ML-Projects\movie-recommender-system\data\tmdb_5000_movies.csv")
-    credits_data = pd.read_csv(r"C:\Users\rahul\Documents\docs\Github Projects\Classic-ML-Projects\movie-recommender-system\data\tmdb_5000_credits.csv")
+
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    DATA_DIR = os.path.join(BASE_DIR, '..', 'data')
+
+    movies_data = pd.read_csv(os.path.join(DATA_DIR, 'tmdb_5000_movies.csv'))
+    credits_data = pd.read_csv(os.path.join(DATA_DIR, 'tmdb_5000_credits.csv'))
     
     # Merge the datasets into one on the basis of title
     merged_data = movies_data.merge(credits_data, on='title')
