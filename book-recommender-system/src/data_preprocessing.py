@@ -1,4 +1,5 @@
 import os
+import pickle
 import pandas as pd
 from sklearn.metrics.pairwise import cosine_similarity
 
@@ -80,3 +81,24 @@ def collaborative_model(min_book_rating=50, min_user_rating=200):
     similarity_score = cosine_similarity(movie_data)
     
     return movie_data, similarity_score 
+
+#--------------Save artifacts as pickel files------------#
+def save_artifacts():
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    ARTIFACTS_DIR = os.path.join(BASE_DIR, '..', 'artifacts')
+    
+    os.makedirs(ARTIFACTS_DIR, exist_ok=True)
+    
+    popular_df = popular_movies()
+    pivot, similarity_score = collaborative_model()
+    books_data, _, _ = load_data()
+
+    pickle.dump(popular_df,       open(os.path.join(ARTIFACTS_DIR, "popular.pkl"), "wb"))
+    pickle.dump(pivot,            open(os.path.join(ARTIFACTS_DIR, "pivot.pkl"), "wb"))
+    pickle.dump(similarity_score, open(os.path.join(ARTIFACTS_DIR, "similarity.pkl"), "wb"))
+    pickle.dump(books_data,       open(os.path.join(ARTIFACTS_DIR, "books.pkl"), "wb"))
+    
+#-----------------Main function-------------#
+if __name__ == "__main__":
+    save_artifacts()
+    print("✅ All artifacts saved successfully!")
