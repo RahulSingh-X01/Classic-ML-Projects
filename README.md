@@ -13,10 +13,8 @@
 </p>
 <br/>
 A curated collection of classic Machine Learning projects built with scikit-learn, pandas, and NumPy — each one deployed live on Streamlit Cloud with a clean interactive UI.
-
 </div>
 ---
-
 
 ---
 
@@ -24,10 +22,11 @@ A curated collection of classic Machine Learning projects built with scikit-lear
 
 ## 🗂️ Projects
 
-| #  | Project                     | Live Demo                                                                                                                                                               | Tech                       |
-| -- | --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- |
-| 01 | 🏠 House Price Prediction   | [![Streamlit](https://img.shields.io/badge/Open%20App-FF4B4B?style=flat-square&logo=streamlit&logoColor=white)](https://house-price-prediction-rahulxsingh.streamlit.app/)   | Regression · scikit-learn |
-| 02 | 🎬 Movie Recommender System | [![Streamlit](https://img.shields.io/badge/Open%20App-FF4B4B?style=flat-square&logo=streamlit&logoColor=white)](https://movie-recommender-system-rahulxsingh.streamlit.app/) | NLP · Cosine Similarity   |
+| #  | Project                     | Live Demo                                                                                                                                                               | Tech                                    |
+| -- | --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------- |
+| 01 | 🏠 House Price Prediction   | [![Streamlit](https://img.shields.io/badge/Open%20App-FF4B4B?style=flat-square&logo=streamlit&logoColor=white)](https://house-price-prediction-rahulxsingh.streamlit.app/)   | Regression · scikit-learn              |
+| 02 | 🎬 Movie Recommender System | [![Streamlit](https://img.shields.io/badge/Open%20App-FF4B4B?style=flat-square&logo=streamlit&logoColor=white)](https://movie-recommender-system-rahulxsingh.streamlit.app/) | NLP · Cosine Similarity                |
+| 03 | 📚 Book Recommender System  | [![Streamlit](https://img.shields.io/badge/Open%20App-FF4B4B?style=flat-square&logo=streamlit&logoColor=white)](https://book-recommender-system-rahulxsingh.streamlit.app/)  | Collaborative Filtering · scikit-learn |
 
 > More projects coming soon — stay tuned! ⭐
 
@@ -57,7 +56,8 @@ Classic-ML-Projects/
 │
 ├── projects/
 │   ├── house-price-prediction/
-│   └── movie-recommender-system/
+│   ├── movie-recommender-system/
+│   └── book-recommender-system/
 │
 ├── .gitignore
 ├── LICENSE
@@ -77,12 +77,11 @@ Classic-ML-Projects/
 
 ---
 
-
 ## 🗺️ Roadmap
 
 * [X] 🏠 House Price Prediction
 * [X] 🎬 Movie Recommender System (content-based filtering)
-* [ ] Book Recommender System (collaborative filtering)
+* [X] 📚 Book Recommender System (collaborative filtering)
 
 ## 🤝 Contributing
 
@@ -97,7 +96,6 @@ Licensed under the [MIT License](https://claude.ai/chat/LICENSE).
 ---
 
 <div align="center">
-Made with ❤️ and curiosity by [Your Name](https://github.com/yourusername)
 
 *If this helped you learn, drop a ⭐ — it keeps the motivation going!*
 
