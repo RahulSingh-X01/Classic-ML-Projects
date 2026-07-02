@@ -22,11 +22,12 @@ A curated collection of classic Machine Learning projects built with scikit-lear
 
 ## 🗂️ Projects
 
-| #  | Project                     | Live Demo                                                                                                                                                               | Tech                                    |
-| -- | --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------- |
+| #  | Project                     | Live Demo                                                                                                                                                                   | Tech                                    |
+| -- | --------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------- |
 | 01 | 🏠 House Price Prediction   | [![Streamlit](https://img.shields.io/badge/Open%20App-FF4B4B?style=flat-square&logo=streamlit&logoColor=white)](https://house-price-prediction-rahulxsingh.streamlit.app/)   | Regression · scikit-learn              |
 | 02 | 🎬 Movie Recommender System | [![Streamlit](https://img.shields.io/badge/Open%20App-FF4B4B?style=flat-square&logo=streamlit&logoColor=white)](https://movie-recommender-system-rahulxsingh.streamlit.app/) | NLP · Cosine Similarity                |
 | 03 | 📚 Book Recommender System  | [![Streamlit](https://img.shields.io/badge/Open%20App-FF4B4B?style=flat-square&logo=streamlit&logoColor=white)](https://book-recommender-system-rahulxsingh.streamlit.app/)  | Collaborative Filtering · scikit-learn |
+| 04 | 📧 Email Spam Classifier    | [![Streamlit](https://img.shields.io/badge/Open%20App-FF4B4B?style=flat-square&logo=streamlit&logoColor=white)](https://email-spam-classifier-rahulxsingh.streamlit.app/)    | NLP · TF-IDF · LinearSVC              |
 
 > More projects coming soon — stay tuned! ⭐
 
@@ -57,7 +58,8 @@ Classic-ML-Projects/
 ├── projects/
 │   ├── house-price-prediction/
 │   ├── movie-recommender-system/
-│   └── book-recommender-system/
+│   ├── book-recommender-system/
+│   └── email-spam-classifier/
 │
 ├── .gitignore
 ├── LICENSE
@@ -82,6 +84,7 @@ Classic-ML-Projects/
 * [X] 🏠 House Price Prediction
 * [X] 🎬 Movie Recommender System (content-based filtering)
 * [X] 📚 Book Recommender System (collaborative filtering)
+* [X] 📧 Email Spam Classifier (TF-IDF + LinearSVC)
 
 ## 🤝 Contributing
 
@@ -96,8 +99,3 @@ Licensed under the [MIT License](https://claude.ai/chat/LICENSE).
 ---
 
 <div align="center">
-
-*If this helped you learn, drop a ⭐ — it keeps the motivation going!*
-
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=100&section=footer" width="100%"/>
-</div>
