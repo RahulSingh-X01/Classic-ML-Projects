@@ -5,6 +5,21 @@ import pandas as pd
 from nltk.stem import PorterStemmer
 from nltk.corpus import stopwords
 
+
+def ensure_nltk_data():
+    resources = {
+        'tokenizers/punkt': 'punkt',
+        'tokenizers/punkt_tab': 'punkt_tab',
+        'corpora/stopwords': 'stopwords',
+    }
+    for path, name in resources.items():
+        try:
+            nltk.data.find(path)
+        except LookupError:
+            nltk.download(name)
+
+ensure_nltk_data()
+
 STOP_WORDS = set(stopwords.words('english'))
 PUNCT = set(string.punctuation)
 
