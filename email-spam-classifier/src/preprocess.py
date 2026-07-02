@@ -1,3 +1,4 @@
+import os
 import nltk
 import string
 import pandas as pd
@@ -9,10 +10,10 @@ PUNCT = set(string.punctuation)
 
 
 def load_data():
-    data = pd.read_csv(
-    r"C:\Users\rahul\Documents\Programming\Github Projects\Classic-ML-Projects\email-spam-classifier\data\spam.csv",
-    encoding="latin-1"
-    )
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    DATA_DIR = os.path.join(BASE_DIR, '..', 'data')
+
+    data = pd.read_csv(os.path.join(DATA_DIR, 'spam.csv'), encoding='latin-1')
     
     return data
 
